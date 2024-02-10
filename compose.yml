@@ -1,0 +1,36 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+version: '3.8'
+services:
+  db:
+    image: postgres:15.0
+    # volumes:
+    #   - ~/volumes/jhipster/baseapi/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - 127.0.0.1:5432:5432
+  app:
+    image: maxiplux/fastapidevops-auth:d023c0ef764e86dc827cceff0f626fccc49e6363
+
+    container_name: app
+    restart: on-failure
+    depends_on:
+      - db
+    environment:
+      - DB_USERNAME=postgres
+      - DB_PASSWORD =postgres
+      - DB_HOST=db
+      - DB_NAME=postgres
+    ports:
+      - 0.0.0.0:8080:80
+
+volumes:
+  cache:
+    driver: local
+networks:
+  dockernet:
+    external: true
