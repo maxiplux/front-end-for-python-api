@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 import { initFlowbite } from 'flowbite';
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent  implements OnInit {
   title = 'angular2024';
 
   ngOnInit(): void {
+    console.log(`Running with:${environment.apiUrl} & production:${environment.production}`);
     initFlowbite();
   }
 }

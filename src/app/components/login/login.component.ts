@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {Token, Usuario} from '../../models/Usuario';
 import { AuthService } from '../../services/auth.service';
-import swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {CommonModule} from "@angular/common";
+import {BrowserModule} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule],
+  imports: [ReactiveFormsModule,FormsModule,CommonModule],
   templateUrl: './login.component.html',
 
 })
@@ -22,31 +24,31 @@ export class LoginComponent {
 
   ngOnInit() {
     if (this.authService.isAuthenticated()) {
-      swal.fire('Login', `Hello ${this.authService.usuario.username} !`, 'info');
-      this.router.navigate(['/dashboard']);
+      Swal.fire('Login', `Hello ${this.authService.usuario.username} !`, 'info');
+      this.router.navigate(['/dashboard/produtos']);
     }
   }
 
   login(): void {
-    console.log(this.usuario);
+
     if (this.usuario.username == null || this.usuario.password == null)
     {
-      swal.fire('Error Login', 'Username or password empty!', 'error');
+      Swal.fire('Error Login', 'Username or password empty!', 'error');
       return;
     }
 
     this.authService.login(this.usuario).subscribe(response   => {
-      console.log(response);
+
 
       this.authService.guardarUsuario(response.access_token);
       this.authService.guardarToken(response.access_token);
       let usuario = this.authService.usuario;
-      this.router.navigate(['/dashboard']);
-      swal.fire('Login', `Hello ${usuario.username}, !`, 'success');
+      this.router.navigate(['/dashboard/products']);
+        Swal.fire('Login', `Hello ${usuario.username} !`, 'success');
     }, err => {
       if (err.status == 400)
       {
-        swal.fire('Error Login', 'Username or Password wrong!', 'error');
+        Swal.fire('Error Login', 'Username or Password wrong!', 'error');
       }
     }
     );

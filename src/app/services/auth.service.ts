@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Token, Usuario} from '../models/Usuario';
+import {environment} from "../../environments/environment";
 
 
 @Injectable({
@@ -13,7 +14,10 @@ export class AuthService {
 
   private _token!: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+
+  }
 
   public get usuario(): Usuario {
     if (this._usuario != null) {
@@ -38,7 +42,7 @@ export class AuthService {
   }
 
   login(usuario: Usuario): Observable<Token> {
-    const urlEndpoint = 'http://127.0.0.1:8080/token';
+    const urlEndpoint = `${environment.apiUrl}/token`;
 
 
 

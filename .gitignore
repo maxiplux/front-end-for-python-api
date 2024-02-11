@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 /.lh/
 /.vscode/
+/.angular/

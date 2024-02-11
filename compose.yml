@@ -13,7 +13,7 @@ services:
     # remove the "127.0.0.1:" prefix
     ports:
       - 127.0.0.1:5432:5432
-  app:
+  backend:
 
     image: maxiplux/fastapidevops-auth:d023c0ef764e86dc827cceff0f626fccc49e6363
 
@@ -28,7 +28,15 @@ services:
       - DB_NAME=postgres
     ports:
       - 0.0.0.0:8080:80
+  front:
 
+    image: maxiplux/fastapidevops-auth:d023c0ef764e86dc827cceff0f626fccc49e6363
+    container_name: front
+    restart: on-failure
+    depends_on:
+      - backend
+    ports:
+      - 0.0.0.0:8081:80
 volumes:
   cache:
     driver: local
