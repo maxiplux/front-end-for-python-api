@@ -17,7 +17,7 @@ services:
 
     image: maxiplux/fastapidevops-auth:d023c0ef764e86dc827cceff0f626fccc49e6363
 
-    container_name: app
+    container_name: backend
     restart: on-failure
     depends_on:
       - db
@@ -29,9 +29,9 @@ services:
     ports:
       - 0.0.0.0:8080:80
   front:
-
-    image: maxiplux/fastapidevops-auth:d023c0ef764e86dc827cceff0f626fccc49e6363
+    image: maxiplux/front-end:66c6d571ba4e26e675d74dc9d2566448ee31e681
     container_name: front
+    platform: linux/arm64/v8
     restart: on-failure
     depends_on:
       - backend
