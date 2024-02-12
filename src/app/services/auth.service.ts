@@ -42,7 +42,9 @@ export class AuthService {
   }
 
   login(usuario: Usuario): Observable<Token> {
-    const urlEndpoint = `${environment.apiUrl}/token`;
+
+    const urlEndpoint = `${environment.apiUrl}/token`.replace("localhost", window.location.hostname);
+
 
 
 

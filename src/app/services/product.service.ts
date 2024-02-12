@@ -12,10 +12,10 @@ export class ProductService {
 
   }
   public save(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${environment.apiUrl}/items`, product);
+    return this.http.post<Product>(`${environment.apiUrl}/items`.replace("localhost", window.location.hostname), product);
   }
   public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${environment.apiUrl}/items`);
+    return this.http.get<Product[]>(`${environment.apiUrl}/items`.replace("localhost", window.location.hostname));
   }
 
 

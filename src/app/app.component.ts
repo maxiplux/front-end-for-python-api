@@ -17,7 +17,10 @@ export class AppComponent  implements OnInit {
   title = 'angular2024';
 
   ngOnInit(): void {
-    console.log(`Running with:${environment.apiUrl} & production:${environment.production}`);
+    const currentDomain=environment.apiUrl.replace("localhost", window.location.hostname);
+
+
+    console.log(`Running with:${currentDomain} & production:${environment.production}`);
     initFlowbite();
   }
 }
